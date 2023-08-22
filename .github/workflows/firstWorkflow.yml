@@ -1,11 +1,11 @@
-name: test
+name: testWorkFlow
 on: workflow_dispatch
 jobs:
-  first_workflow:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name : Sample
-        run : echo "Hello"
+      - name : Setup
+        run : echo "Set up"
       - name : Checkout
         uses : actions/checkout@v3
       - name : install node
@@ -14,3 +14,13 @@ jobs:
           node-version: 16
       - name : mock installed
         run : echo "Node Installed"
+  deploy:
+    needs : build
+    runs-on: ubuntu-latest
+    steps:
+      - name : Setup
+        run : echo "Sample deploy setup"
+      - name : Process
+        run : echo "Processing"
+      - name : Post deploy
+        run : echo "Deployed successfully"
